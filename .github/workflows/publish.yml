@@ -1,9 +1,8 @@
 name: Publish
 on:
-  pull_request:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
   publish_to_dockerhub:
@@ -30,14 +29,11 @@ jobs:
             latest=auto
           images: |
             msshapira/react-native-android
-          tags: |
-            type=ref,event=tag
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}
+          tags: type=raw,value=latest
       - name: Build & publish to Docker Hub
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
