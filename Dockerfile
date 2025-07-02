@@ -79,7 +79,7 @@ RUN curl -sS https://dl.google.com/android/repository/${SDK_VERSION} -o /tmp/sdk
     && yes | sdkmanager --licenses \
     && yes | sdkmanager "platform-tools" \
         "platforms;android-$ANDROID_BUILD_VERSION" \
-        "platforms;android-34 \
+        "platforms;android-34" \
         "build-tools;$ANDROID_TOOLS_VERSION" \
         "cmake;$CMAKE_VERSION" \
         "ndk;$NDK_VERSION" \
